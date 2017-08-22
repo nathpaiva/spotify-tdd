@@ -1,0 +1,50 @@
+{
+  "name": "spotify-tdd",
+  "version": "1.0.0",
+  "description": "A project to work with tdd and with the Spotify Web API",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint ./src/*.js",
+    "prepush": "npm run lint && npm run test:cove",
+    "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-core/register",
+    "test:tdd": "./node_modules/.bin/mocha --watch  --require babel-core/register tests/*.spec.js",
+    "test:cove": "nyc npm test"
+  },
+  "nyc": {
+    "functions": 80,
+    "lines": 80,
+    "check-coverage": true,
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nathpaiva/spotify-tdd.git"
+  },
+  "author": "Nath Paiva <hello@nathpaiva.com.br>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nathpaiva/spotify-tdd/issues"
+  },
+  "homepage": "https://github.com/nathpaiva/spotify-tdd#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.1",
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0",
+    "husky": "^0.14.3",
+    "mocha": "^3.5.0",
+    "node-fetch": "^1.7.2",
+    "nyc": "^11.1.0",
+    "sinon": "^3.2.1",
+    "sinon-chai": "^2.13.0",
+    "sinon-stub-promise": "^4.0.0"
+  }
+}
