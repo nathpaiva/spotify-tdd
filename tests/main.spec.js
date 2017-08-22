@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import sinonStubPromise from 'sinon-stub-promise';
 
-import { search, searchAlbuns, searchArtists, searchTracks, searchPlaylists } from '../src/main';
+import { search, searchArtists, searchAlbums, searchTracks, searchPlaylists } from '../src/main';
 
 chai.use(sinonChai);
 sinonStubPromise(sinon);
@@ -27,11 +27,11 @@ describe('Spotify Search', () => {
     it('should exist the search method', () => {
       expect(search).to.exist;
     });
-    it('should exist the searchAlbuns method', () => {
-      expect(searchAlbuns).to.exist;
-    });
     it('should exist the searchArtists method', () => {
       expect(searchArtists).to.exist;
+    });
+    it('should exist the searchAlbuns method', () => {
+      expect(searchAlbums).to.exist;
     });
     it('should exist the searchTracks method', () => {
       expect(searchTracks).to.exist;
@@ -69,6 +69,50 @@ describe('Spotify Search', () => {
       promise.resolves({ body: 'json' });
       const artists = search('Incubus', 'artist');
       expect(artists.resolveValue).to.be.eql({ body: 'json' });
+    });
+  });
+
+  describe('searchArtists', () => {
+    it('should call fetch function', () => {
+      searchArtists('Strokes');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+    it('should call correct url', () => {
+      const artists = searchArtists('Strokes');
+      expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Strokes&type=artist');
+    });
+  });
+
+  describe('searchAlbums', () => {
+    it('should call fetch function', () => {
+      searchAlbums('Strokes');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+    it('should call correct url', () => {
+      const albums = searchAlbums('Strokes');
+      expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Strokes&type=album');
+    });
+  });
+
+  describe('searchTracks', () => {
+    it('should call fetch function', () => {
+      searchTracks('Last Nite');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+    it('should call correct url', () => {
+      const tracks = searchTracks('Last Nite');
+      expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Last Nite&type=track');
+    });
+  });
+
+  describe('searchPlaylists', () => {
+    it('should call fetch function', () => {
+      searchPlaylists('BestOfStrokes');
+      expect(fetchedStub).to.have.been.calledOnce;
+    });
+    it('should call correct url', () => {
+      const tracks = searchPlaylists('BestOfStrokes');
+      expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=BestOfStrokes&type=playlist');
     });
   });
 });
