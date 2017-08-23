@@ -15,7 +15,7 @@
     "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-core/register",
     "test:tdd": "./node_modules/.bin/mocha --watch  --require babel-core/register tests/*.spec.js",
     "test:cove": "nyc npm test",
-    "coveralls": "nyc run test:cove && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "npm run test:cove && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "functions": 80,
