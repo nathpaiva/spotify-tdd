@@ -14,7 +14,8 @@
     "prepush": "npm run lint && npm run test:cove",
     "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-core/register",
     "test:tdd": "./node_modules/.bin/mocha --watch  --require babel-core/register tests/*.spec.js",
-    "test:cove": "nyc npm test"
+    "test:cove": "nyc npm test",
+    "coveralls": "nyc run test:cove && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "functions": 80,
@@ -44,6 +45,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "chai": "^4.1.1",
+    "coveralls": "^2.13.1",
     "eslint": "^4.0.0",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-plugin-import": "^2.7.0",
